@@ -1,2 +1,1 @@
-# jdmcmahon03.github.io
-For Wake Tech
+My name is Jacob and this is my second degree at Wake Tech. My favorite animals are dogs but foxes are a close second. I look forward to learning github in general because its helpful resource and tool in game design.
