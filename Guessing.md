@@ -12,6 +12,18 @@ ValidatePlayersInput -- _If player inputs a valid number_ --> ValidInput([Displa
 -- _If Guess is To High_ --> TellPlayerThereGuessistoHigh([Display message Guess is to **high**, try again])
 -- _If Guess is To Low_ --> TellPlayerThereGuessistoLow([Guess is to **low**, try again])
 -- _If Guess is Correct_ --> TellPlayerThereGuessisCorrect([Guess is **CORRECT**])
+-->EndGame([End game])
 
 --> End([End])
 ```
+
+ Description of Each Step in the Process
+ Generate Random Number:
+ Set Attempts:
+ Prompt Plater To Input Guess:
+ Valdiate the Input as Invalid or Valid number: 
+ Check Guess:
+ Is Guess to Low:
+ Is Guess to High:
+ Correct Guess:
+ End: 
