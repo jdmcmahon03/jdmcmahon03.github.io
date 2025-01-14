@@ -1,4 +1,8 @@
 ```mermaid
 flowchart TD
-Start([Start]) --> End([End])
+Start([Start]) --> GenerateRandomNumber[Generate Random Number]
+
+
+
+ End([End])
 ```
