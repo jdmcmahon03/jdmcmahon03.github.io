@@ -55,3 +55,48 @@ function populateGradebook(data) {
         tableElm.appendChild(row);
     });
 }
+
+
+// Sample grade data
+const grades = [
+  {
+    name: "Doe, John",
+    grades: [95, 88, 100]
+  },
+  {
+    name: "Smith, Jane",
+    grades: [92, 85, 98]
+  },
+  {
+    name: "Brown, Chris",
+    grades: [89, 90, 87]
+  }
+];
+
+// Dynamically populate the table
+function populateGradebook(data) {
+  const table = document.getElementById("gradebook").getElementsByTagName('tbody')[0];
+
+  data.forEach(student => {
+    const row = document.createElement("tr");
+
+    // Add name
+    const nameCell = document.createElement("td");
+    nameCell.textContent = student.name;
+    row.appendChild(nameCell);
+
+    // Add each grade
+    student.grades.forEach(score => {
+      const gradeCell = document.createElement("td");
+      gradeCell.textContent = score;
+      row.appendChild(gradeCell);
+    });
+
+    table.appendChild(row);
+  });
+}
+
+// Run when page loads
+window.onload = () => {
+  populateGradebook(grades);
+};
