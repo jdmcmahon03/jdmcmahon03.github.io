@@ -35,6 +35,13 @@ function populateGradebook(data) {
                 // Concatenate the full name:  "last_name, first_name"
                 document.createTextNode(assignment.last_name + ", " + assignment.first_name)
             );
+
+            // Grade
+            columns.grade = document.createElement('td');
+            columns.grade.appendChild(
+                document.createTextNode(parseFloat(assignment.total_grade).toFixed(2)) // Format to 2 decimals
+            );
+            
             // Add the table data columns to the table row
             row.appendChild(columns.name);
             row.appendChild(columns.grade);
