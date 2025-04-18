@@ -1,63 +1,51 @@
-// Fetch data from the PostgreSQL database
 function fetchGradeData() {
+    //this function will query the postgreSQL database and return grade data
     console.log("Fetching grade data...");
-
+    //create a new request for HTTP data
     let xhr = new XMLHttpRequest();
+    //This is the address on the machine we're asking for data
     let apiRoute = "/api/grades";
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status !== 200) {
-                console.error(`Could not get grades. Status: ${xhr.status}`);
-                return;
+    //When the request changes status, we run this anonymous function
+    xhr.onreadystatechange = function(){
+        let results;
+        //Check if we're done
+        if(xhr.readyState === xhr.DONE){
+            //Check if we're successful
+            if(xhr.status !== 200){
+                console.error(`Could not get grades.
+                    Status: ${xhr.status}`);
             }
-
-            try {
-                const data = JSON.parse(xhr.responseText);
-                populateGradebook(data);
-            } catch (e) {
-                console.error("Error parsing JSON response:", e);
+            //And then call the function to update the HTML with our data
+            populateGradebook(JSON.parse(xhr.responseText));
             }
-        }
-    };
-
-    xhr.open("GET", apiRoute, true);
+    }.bind(this);
+    xhr.open("get", apiRoute, true);
     xhr.send();
 }
 
-// Populate the table with grade data
 function populateGradebook(data) {
+    //This function will take the fetched grade data and populate the table
     console.log("Populating gradebook with data:", data);
-    
-    let tableBody = document.querySelector("#gradebook tbody");
-    tableBody.innerHTML = ""; // Clear previous rows
-
-    data.forEach(assignment => {
-        let row = document.createElement("tr");
-
-        // Student Name column
-        let nameCell = document.createElement("td");
-        nameCell.textContent = `${assignment.last_name}, ${assignment.first_name}`;
-        row.appendChild(nameCell);
-
-        // Assignment Grades (adjust depending on how data is structured)
-        let assignment1 = document.createElement("td");
-        assignment1.textContent = assignment.assignment_1 ?? "-";
-        row.appendChild(assignment1);
-
-        let assignment2 = document.createElement("td");
-        assignment2.textContent = assignment.assignment_2 ?? "-";
-        row.appendChild(assignment2);
-
-        let assignment3 = document.createElement("td");
-        assignment3.textContent = assignment.assignment_3 ?? "-";
-        row.appendChild(assignment3);
-
-        tableBody.appendChild(row);
-    });
+    let tableElm = document.getElementById("gradebook"); // Get the gradebook table element
+        data.forEach(function(assignment){ // For each row of data we're passed in
+            let row = document.createElement("tr"); // Create a table row element
+            let columns = []; // Handy place to stick the colums of information
+            columns.name = document.createElement('td'); // The first column's table data will be the name
+            columns.name.appendChild(
+                // Concatenate the full name:  "last_name, first_name"
+                document.createTextNode(assignment.last_name + ", " + assignment.first_name)
+            );
+            // Add the table data columns to the table row
+            row.appendChild(columns.name);
+            row.appendChild(columns.grade);
+            // Add the row to the table itself to make the data visisble
+            tableElm.appendChild(row);
+        });
 }
 
-// Run when page loads
-window.onload = () => {
-    fetchGradeData();
-};
+            
+
+
+
+
+                
