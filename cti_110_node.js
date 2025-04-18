@@ -17,6 +17,8 @@ const pool = new Pool({connectionString:connectionString})
 // This line says when it's looking for a file linked locally,
 // check in sub-folder "public"
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
+
 
 // This creates a new anonymous function that runs whenever 
 // someone calls "get" on the server root "/"
