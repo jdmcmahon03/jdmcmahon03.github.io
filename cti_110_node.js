@@ -30,7 +30,7 @@ router.get('/', function(req, res){
 
 app.use("/", router);
 
-router.get('/api/grades',function(req, res){
+router.get('/api/grade',function(req, res){
     pool.query(
         `SELECT Students.student_id, first_name, last_name, AVG(assignments.grade) as total_grade \
             FROM Students  \
